@@ -1,5 +1,6 @@
 package me.nivyox.discord;
 
+import me.nivyox.discord.Commands.HelpCommand;
 import me.nivyox.discord.Commands.MemeCommand;
 import me.nivyox.discord.Commands.PingCommand;
 import me.nivyox.discord.utils.CommandParser;
@@ -35,6 +36,7 @@ public class Main {
 
         commands.put("ping", new PingCommand());
         commands.put("meme", new MemeCommand());
+        commands.put("help", new HelpCommand());
     }
 
     public static void handleCommand(CommandParser.CommandContainer cmd){
@@ -49,5 +51,9 @@ public class Main {
             }
         }
 
+    }
+
+    public HashMap<String, Command> getCommands(){
+        return commands;
     }
 }

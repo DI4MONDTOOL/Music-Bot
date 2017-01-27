@@ -1,19 +1,14 @@
 package me.nivyox.discord.Commands;
 
 import me.nivyox.discord.Command;
+import me.nivyox.discord.Main;
+import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Random;
-
 
 /**
  * Created by Borre on 27/01/2017.
  */
-public class MemeCommand implements Command {
-    public static String HELP ="USAGE: /meme";
-    public Random r = new Random();
+public class HelpCommand implements Command {
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -22,22 +17,16 @@ public class MemeCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-
-        int maximum = (r.nextInt(3) + 1);
-
-        try {
-            event.getChannel().sendFile(new File("Assets/Meme" + maximum + ".jpg"), null).queue();
-        } catch (IOException e1) {
-            System.out.println("probably could not be found");
-            e1.printStackTrace();
-
+        if(event.isFromType(ChannelType.TEXT)){
+            event.getChannel().sendMessage("All possible commands are: " + Main.commands.keySet()).queue();
+        }else if (event.isFromType(ChannelType.PRIVATE)){
+            event.getAuthor().getPrivateChannel().sendMessage("All possible commands are: " + Main.commands).queue();
         }
-
     }
 
     @Override
     public String help() {
-        return HELP;
+        return null;
     }
 
     @Override
