@@ -8,7 +8,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
  * Created by Borre on 27/01/2017.
  */
 public class PingCommand implements Command {
-    private final String HELP = "USAGE: !ping";
+    private final String HELP = "USAGE: /ping";
 
     public boolean called(String[] args, MessageReceivedEvent event) {
 

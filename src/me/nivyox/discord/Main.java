@@ -1,5 +1,6 @@
 package me.nivyox.discord;
 
+import me.nivyox.discord.Commands.MemeCommand;
 import me.nivyox.discord.Commands.PingCommand;
 import me.nivyox.discord.utils.CommandParser;
 import me.nivyox.discord.utils.StaticValues;
@@ -17,7 +18,7 @@ public class Main {
 
     public static JDA jda;
     public static final CommandParser parser = new CommandParser();
-
+    public static MemeCommand Meme;
     public static HashMap<String, Command> commands = new HashMap<String, Command>();
 
     public static void main(String[] args) {
@@ -33,6 +34,7 @@ public class Main {
         }
 
         commands.put("ping", new PingCommand());
+        commands.put("meme", new MemeCommand());
     }
 
     public static void handleCommand(CommandParser.CommandContainer cmd){
