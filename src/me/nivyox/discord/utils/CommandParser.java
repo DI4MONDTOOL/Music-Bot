@@ -11,7 +11,7 @@ import java.util.StringJoiner;
 public class CommandParser {
 
     public CommandContainer parse(String rw, MessageReceivedEvent e){
-        ArrayList<String> split = new ArrayList< String>();
+        ArrayList<String> split = new ArrayList<String>();
         String raw = rw;
         String beheaded = raw.replaceFirst("!", "");
         String[] splitBeheaded = beheaded.split(" ");

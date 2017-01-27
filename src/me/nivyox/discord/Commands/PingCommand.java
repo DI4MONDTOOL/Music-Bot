@@ -1,13 +1,14 @@
 package me.nivyox.discord.Commands;
 
 import me.nivyox.discord.Command;
+import net.dv8tion.jda.core.entities.ChannelType;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 /**
  * Created by Borre on 27/01/2017.
  */
 public class PingCommand implements Command {
-    private final String HELP = "USAGE: /ping";
+    private final String HELP = "USAGE: !ping";
 
     public boolean called(String[] args, MessageReceivedEvent event) {
 
@@ -16,7 +17,13 @@ public class PingCommand implements Command {
 
     public void action(String[] args, MessageReceivedEvent event) {
 
-        event.getTextChannel().sendMessage("PONG");
+
+        if(event.isFromType(ChannelType.TEXT)){
+            event.getChannel().sendMessage("PONG").queue();
+        }else if (event.isFromType(ChannelType.PRIVATE)){
+            event.getAuthor().getPrivateChannel().sendMessage("PONG").queue();
+        }
+
     }
 
     public String help() {
