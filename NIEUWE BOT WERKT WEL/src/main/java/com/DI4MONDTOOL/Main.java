@@ -1,10 +1,9 @@
 package com.DI4MONDTOOL;
 
-import com.DI4MONDTOOL.Commands.HelpCommand;
-import com.DI4MONDTOOL.Commands.MemeCommand;
-import com.DI4MONDTOOL.Commands.PingCommand;
+import com.DI4MONDTOOL.Commands.*;
 import com.DI4MONDTOOL.Music.GuildMusicManager;
 import com.DI4MONDTOOL.Utils.CommandParser;
+import com.DI4MONDTOOL.Utils.MusicCommands;
 import com.DI4MONDTOOL.Utils.StaticValues;
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
@@ -45,12 +44,15 @@ public class Main extends ListenerAdapter {
 	    commands.put("ping", new PingCommand());
 	    commands.put("help", new HelpCommand());
 	    commands.put("meme", new MemeCommand());
-
+	    commands.put("play", new PlayCommand());
+	    commands.put("pause", new PauseCommand());
+        commands.put("volume", new VolumeCommand());
+        commands.put("resume", new ResumeCommand());
     }
 
     //Vars voor music
-    private final AudioPlayerManager playerManager;
-    private final Map<Long, GuildMusicManager> musicManagers;
+    private static AudioPlayerManager playerManager;
+    private static Map<Long, GuildMusicManager> musicManagers;
 
 
     //Constructor voor main fixt alles voor music
@@ -59,22 +61,10 @@ public class Main extends ListenerAdapter {
 		this.playerManager = new DefaultAudioPlayerManager();
 		AudioSourceManagers.registerRemoteSources(playerManager);
 		AudioSourceManagers.registerLocalSource(playerManager);
+		new MusicCommands(playerManager, musicManagers);
     }
 
-    //Geen idee wat dit doet
-    private synchronized GuildMusicManager getGuildAudioPlayer(Guild guild) {
-	    long guildId = Long.parseLong(guild.getId());
-	    GuildMusicManager musicManager = musicManagers.get(guildId);
 
-    	if (musicManager == null) {
-            musicManager = new GuildMusicManager(playerManager);
-	        musicManagers.put(guildId, musicManager);
-	    }
-
-	    guild.getAudioManager().setSendingHandler(musicManager.getSendHandler());
-
-	    return musicManager;
-    }
 
     //als er message wordt ontvangen doe dit
     @Override
@@ -82,70 +72,13 @@ public class Main extends ListenerAdapter {
         //als message begint met "/" dan is het een commando en doe dan dit
 	    if (event.getMessage().getContent().startsWith("/") && event.getAuthor().getId() != jda.getSelfUser().getId()) {
             //Splits alle argumenten van elkaar en steek ze in een lijst.
-	        Main.handleCommand(parser.parse(event.getMessage().getContent().toLowerCase(), event));
+	        Main.handleCommand(parser.parse(event.getMessage().getContent(), event));
             //loadAndPlay(event.getTextChannel(), "https://www.youtube.com/watch?v=_lnvidAkBh4");
         }
 
     }
 
-    //methode voor het laden en spelen van muziek
-    private void loadAndPlay(TextChannel channel, String trackUrl) {
-	    GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
 
-	    playerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
-	        @Override
-	        public void trackLoaded(AudioTrack track) {
-		        channel.sendMessage("Adding to queue " + track.getInfo().title).queue();
-
-		        play(channel.getGuild(), musicManager, track);
-	        }
-
-	        @Override
-	        public void playlistLoaded(AudioPlaylist playlist) {
-		        AudioTrack firstTrack = playlist.getSelectedTrack();
-
-		        if (firstTrack == null) {
-		        firstTrack = playlist.getTracks().get(0);
-		        }
-
-		        channel.sendMessage("Adding to queue " + firstTrack.getInfo().title + " (first track of playlist " + playlist.getName() + ")").queue();
-
-		        play(channel.getGuild(), musicManager, firstTrack);
-	        }
-
-	        @Override
-            public void noMatches() {
-		channel.sendMessage("Nothing found by " + trackUrl).queue();
-	  }
-
-	        @Override
-	        public void loadFailed(FriendlyException exception) {
-		        channel.sendMessage("Could not play: " + exception.getMessage()).queue();
-	        }
-	    });
-    }
-    //methode voor het spelen van muziek
-    private void play(Guild guild, GuildMusicManager musicManager, AudioTrack track) {
-	    connectToFirstVoiceChannel(guild.getAudioManager());
-
-	    musicManager.scheduler.queue(track);
-    }
-
-    private void skipTrack(TextChannel channel) {
-	    GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
-	    musicManager.scheduler.nextTrack();
-
-	    channel.sendMessage("Skipped to next track.").queue();
-    }
-
-    private static void connectToFirstVoiceChannel(AudioManager audioManager) {
-	    if (!audioManager.isConnected() && !audioManager.isAttemptingToConnect()) {
-	        for (VoiceChannel voiceChannel : audioManager.getGuild().getVoiceChannels()) {
-		    audioManager.openAudioConnection(voiceChannel);
-		    break;
-	        }
-	    }
-    }
 
 
     public static void handleCommand(CommandParser.CommandContainer cmd) {

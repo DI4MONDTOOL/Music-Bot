@@ -53,4 +53,17 @@ public class TrackScheduler extends AudioEventAdapter {
       nextTrack();
     }
   }
+
+  public void pause(){
+    player.setPaused(true);
+  }
+
+  public void resume(){
+    player.setPaused(false);
+  }
+
+  public void setVolume(int volume){
+    player.setVolume(volume);
+  }
+
 }

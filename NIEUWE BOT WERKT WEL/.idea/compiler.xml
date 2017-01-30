@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
-      <module name="Bot-master_main" target="1.8" />
-      <module name="Bot-master_test" target="1.8" />
+      <module name="NIEUWE_BOT_WERKT_WEL_main" target="1.8" />
+      <module name="NIEUWE_BOT_WERKT_WEL_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
