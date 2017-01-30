@@ -18,7 +18,7 @@ public class VolumeCommand implements Command {
     public void action(String[] args, MessageReceivedEvent event) {
         int volume = Integer.parseInt(args[0]);
         MusicCommands.setVolume(volume, event.getTextChannel());
-        event.getTextChannel().sendMessage("Volume is now: " + volume);
+        event.getTextChannel().sendMessage("Volume is now: " + volume).queue();
     }
 
     @Override

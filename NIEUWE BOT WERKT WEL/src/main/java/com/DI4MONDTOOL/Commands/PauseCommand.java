@@ -17,7 +17,7 @@ public class PauseCommand implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
         MusicCommands.stopPlaying(event.getTextChannel());
-        event.getTextChannel().sendMessage("Player paused");
+        event.getTextChannel().sendMessage("Player paused").queue();
     }
 
     @Override

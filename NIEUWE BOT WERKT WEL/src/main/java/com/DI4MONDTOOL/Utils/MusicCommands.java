@@ -12,6 +12,7 @@ import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.managers.AudioManager;
 
 import java.util.Map;
+import java.util.concurrent.BlockingDeque;
 
 /**
  * Created by Borre on 29/01/2017.
@@ -80,6 +81,8 @@ public class MusicCommands {
     }
     //methode voor het spelen van muziek
     public static void play(Guild guild, GuildMusicManager musicManager, AudioTrack track) {
+        musicManager.scheduler.setVolume(15);
+
         connectToFirstVoiceChannel(guild.getAudioManager());
 
         musicManager.scheduler.queue(track);
@@ -114,6 +117,11 @@ public class MusicCommands {
     public static void setVolume(int volume, TextChannel channel){
         GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
         musicManager.scheduler.setVolume(volume);
+    }
+
+    public static BlockingDeque<AudioTrack> getQueue(TextChannel channel){
+        GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
+        return musicManager.scheduler.getQueue();
     }
 
 }

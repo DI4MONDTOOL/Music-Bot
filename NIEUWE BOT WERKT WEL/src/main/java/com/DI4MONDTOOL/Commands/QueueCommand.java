@@ -2,12 +2,20 @@ package com.DI4MONDTOOL.Commands;
 
 import com.DI4MONDTOOL.Command;
 import com.DI4MONDTOOL.Utils.MusicCommands;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Borre on 30/01/2017.
  */
-public class ResumeCommand implements Command {
+public class QueueCommand implements Command {
+
+    public ArrayList<String> queue;
+
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -16,8 +24,14 @@ public class ResumeCommand implements Command {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        MusicCommands.resumePlaying(event.getTextChannel());
-        event.getTextChannel().sendMessage("Player resumed").queue();
+        queue = new ArrayList<>();
+        for (AudioTrack a : MusicCommands.getQueue(event.getTextChannel())) {
+            queue.add(a.getInfo().title);
+            System.out.print(a.getInfo().title);
+
+        }
+
+        event.getChannel().sendMessage("Current queue: " + queue ).queue();
     }
 
     @Override

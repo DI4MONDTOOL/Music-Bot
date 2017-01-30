@@ -48,6 +48,7 @@ public class Main extends ListenerAdapter {
 	    commands.put("pause", new PauseCommand());
         commands.put("volume", new VolumeCommand());
         commands.put("resume", new ResumeCommand());
+        commands.put("queue", new QueueCommand());
     }
 
     //Vars voor music
@@ -72,7 +73,7 @@ public class Main extends ListenerAdapter {
         //als message begint met "/" dan is het een commando en doe dan dit
 	    if (event.getMessage().getContent().startsWith("/") && event.getAuthor().getId() != jda.getSelfUser().getId()) {
             //Splits alle argumenten van elkaar en steek ze in een lijst.
-	        Main.handleCommand(parser.parse(event.getMessage().getContent(), event));
+	        Main.handleCommand(parser.parse(event.getMessage().getContent(), event), event);
             //loadAndPlay(event.getTextChannel(), "https://www.youtube.com/watch?v=_lnvidAkBh4");
         }
 
@@ -81,7 +82,7 @@ public class Main extends ListenerAdapter {
 
 
 
-    public static void handleCommand(CommandParser.CommandContainer cmd) {
+    public static void handleCommand(CommandParser.CommandContainer cmd, MessageReceivedEvent event) {
         //System.out.println(cmd.invoke);
         if (commands.containsKey(cmd.invoke)) {
             boolean safe = commands.get(cmd.invoke).called(cmd.args, cmd.event);
@@ -91,7 +92,7 @@ public class Main extends ListenerAdapter {
             } else {
                 commands.get(cmd.invoke).executed(safe, cmd.event);
             }
-        }
+        }else event.getTextChannel().sendMessage("Use /help to see all available commands").queue();
 
     }
 }

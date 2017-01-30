@@ -5,7 +5,9 @@ import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
 
+import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -13,14 +15,14 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class TrackScheduler extends AudioEventAdapter {
   private final AudioPlayer player;
-  private final BlockingQueue<AudioTrack> queue;
+  private final BlockingDeque<AudioTrack> queue;
 
   /**
    * @param player The audio player this scheduler uses
    */
   public TrackScheduler(AudioPlayer player) {
     this.player = player;
-    this.queue = new LinkedBlockingQueue<>();
+    this.queue = new LinkedBlockingDeque<>();
   }
 
   /**
@@ -64,6 +66,10 @@ public class TrackScheduler extends AudioEventAdapter {
 
   public void setVolume(int volume){
     player.setVolume(volume);
+  }
+
+  public BlockingDeque<AudioTrack> getQueue(){
+    return queue;
   }
 
 }
