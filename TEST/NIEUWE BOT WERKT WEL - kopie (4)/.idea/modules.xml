@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/NIEUWE BOT WERKT WEL.iml" filepath="$PROJECT_DIR$/.idea/modules/NIEUWE BOT WERKT WEL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/NIEUWE_BOT_WERKT_WEL_main.iml" filepath="$PROJECT_DIR$/.idea/modules/NIEUWE_BOT_WERKT_WEL_main.iml" group="NIEUWE BOT WERKT WEL" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/NIEUWE_BOT_WERKT_WEL_test.iml" filepath="$PROJECT_DIR$/.idea/modules/NIEUWE_BOT_WERKT_WEL_test.iml" group="NIEUWE BOT WERKT WEL" />
+    </modules>
+  </component>
+</project>
