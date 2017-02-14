@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/NIEUWE BOT WERKT WEL.iml" filepath="$PROJECT_DIR$/.idea/modules/NIEUWE BOT WERKT WEL.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/NIEUWE_BOT_WERKT_WEL_main.iml" filepath="$PROJECT_DIR$/.idea/modules/NIEUWE_BOT_WERKT_WEL_main.iml" group="NIEUWE BOT WERKT WEL" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/NIEUWE_BOT_WERKT_WEL_test.iml" filepath="$PROJECT_DIR$/.idea/modules/NIEUWE_BOT_WERKT_WEL_test.iml" group="NIEUWE BOT WERKT WEL" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Music Bot v1.1.iml" filepath="$PROJECT_DIR$/.idea/modules/Music Bot v1.1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Music_Bot_v1.1_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Music_Bot_v1.1_main.iml" group="Music Bot v1.1" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Music_Bot_v1.1_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Music_Bot_v1.1_test.iml" group="Music Bot v1.1" />
     </modules>
   </component>
 </project>

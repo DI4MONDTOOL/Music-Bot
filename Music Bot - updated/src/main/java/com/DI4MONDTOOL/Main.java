@@ -61,8 +61,6 @@ public class Main extends ListenerAdapter {
 		new MusicCommands(playerManager, musicManagers);
     }
 
-
-
     //als er message wordt ontvangen doe dit
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
@@ -72,12 +70,10 @@ public class Main extends ListenerAdapter {
             //Splits alle argumenten van elkaar en steek ze in een lijst.
 	        Main.handleCommand(parser.parse(event.getMessage().getContent(), event), event);
             //loadAndPlay(event.getTextChannel(), "https://www.youtube.com/watch?v=_lnvidAkBh4");
+
         }
 
     }
-
-
-
 
     public static void handleCommand(CommandParser.CommandContainer cmd, MessageReceivedEvent event) {
         //System.out.println(cmd.invoke);
@@ -91,7 +87,7 @@ public class Main extends ListenerAdapter {
                 }else{
                     if(cmd.args[0].equals("help"))
                     {
-                        System.out.print("help");
+
                         event.getChannel().sendMessage(commands.get(cmd.invoke).help()).queue();
                     }else
                     {
@@ -107,6 +103,6 @@ public class Main extends ListenerAdapter {
 
 
         }else event.getTextChannel().sendMessage("Use /help to see all available commands").queue();
-
     }
+
 }

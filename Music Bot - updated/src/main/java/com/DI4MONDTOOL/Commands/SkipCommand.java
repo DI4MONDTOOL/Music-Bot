@@ -22,7 +22,7 @@ public class SkipCommand implements Command {
 
     @Override
     public String help() {
-        return null;
+        return "The **/skip command** skips the current track.";
     }
 
     @Override

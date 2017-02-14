@@ -22,7 +22,7 @@ public class ResumeCommand implements Command {
 
     @Override
     public String help() {
-        return null;
+        return "The **/resume command** resumes to Music Bot.";
     }
 
     @Override

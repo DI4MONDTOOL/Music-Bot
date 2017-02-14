@@ -27,7 +27,7 @@ public class StopCommand implements Command
 
     @Override
     public String help() {
-        return null;
+        return "The **/stop command** stops the Music Bot and clears the queue. To continue listening, you must use **/resume** again.";
     }
 
     @Override

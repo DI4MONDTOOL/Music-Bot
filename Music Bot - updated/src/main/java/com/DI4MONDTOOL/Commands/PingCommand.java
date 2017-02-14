@@ -34,7 +34,6 @@ public class PingCommand implements Command {
 
     public void executed(boolean succes, MessageReceivedEvent event)
     {
-        event.getMessage().deleteMessage();
-        return;
+
     }
 }
