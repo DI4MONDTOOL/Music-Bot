@@ -28,8 +28,10 @@ public class QueueCommand implements Command {
             //System.out.print(a.getInfo().title);
 
         }
+        if(queue != null){
+            event.getChannel().sendMessage("Current queue: " + queue ).queue();
+        }else event.getChannel().sendMessage("Queue is empty").queue();
 
-        event.getChannel().sendMessage("Current queue: " + queue ).queue();
     }
 
     @Override

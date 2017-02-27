@@ -72,11 +72,9 @@ public class TrackScheduler extends AudioEventAdapter {
   }
 
   public BlockingDeque<AudioTrack> getQueue(){
-    if (queue.size() != 0) {
+
       return queue;
-    }else{
-      throw new IllegalArgumentException("The queue is empty.");
-    }
+
 
   }
 }

@@ -172,6 +172,7 @@ public class MusicCommands {
     {
         GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
         AudioTrack track = musicManager.player.getPlayingTrack();
+
         return track.getInfo().title;
 
     }

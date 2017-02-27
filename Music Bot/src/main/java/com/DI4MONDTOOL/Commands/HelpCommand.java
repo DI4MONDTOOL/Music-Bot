@@ -21,8 +21,9 @@ public class HelpCommand implements Command {
         {
             command = command + '/' + s + "\r\n";
         }
+        event.getAuthor().openPrivateChannel().complete();
         event.getAuthor().getPrivateChannel().sendMessage("Do " + "**/<command> help**" + " to get more info about the command itself!" + "\r\n" +
-                "**All possible commands are:**" + "\r\n" + command).queue();
+                "**All possible commands are:**" + "\r\n" + command + "\r\n" + "Don't use this private channel to use commands!").queue();
 
     }
     @Override
